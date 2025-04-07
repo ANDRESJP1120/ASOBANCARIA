@@ -6,10 +6,7 @@ function App() {
   const [originalFileName, setOriginalFileName] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const getLastDayOfMonth = (year: number, month: number): string => {
-    const lastDay = new Date(year, month, 0).getDate();
-    return lastDay.toString().padStart(2, '0');
-  };
+ 
 
   const processLine = (line: string): string => {
     // Check if line starts with '06' (company line)
@@ -31,20 +28,8 @@ function App() {
              line.substring(numberEndPos);
 
       // Find and update the date
-      const dateStartPos = 126;
-      const dateEndPos = dateStartPos + 8;
-      const dateStr = line.substring(dateStartPos, dateEndPos);
-      if (dateStr.length === 8) {
-        const year = parseInt(dateStr.substring(0, 4));
-        const month = parseInt(dateStr.substring(4, 6));
-        const lastDay = getLastDayOfMonth(year, month);
-        const newDate = `${dateStr.substring(0, 4)}${dateStr.substring(4, 6)}${lastDay}`;
-        
-        // Replace the date in the exact position
-        line = line.substring(0, dateStartPos) + 
-               newDate + 
-               line.substring(dateEndPos);
-      }
+  
+     
     }
     return line;
   };
